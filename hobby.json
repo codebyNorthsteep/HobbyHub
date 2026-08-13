@@ -1,0 +1,231 @@
+{
+  "hobbies": [
+    {
+      "id": "photography",
+      "name": "Photography",
+      "category": "Creative",
+      "price": "$$",
+      "availability": "High",
+      "difficulty": 2,
+      "image": "img/photography.jpg",
+      "description": "Explore the world through the camera lens and learn to capture people, nature, architecture, and everyday moments.",
+      "whatYouNeed": [
+        "Camera or smartphone",
+        "Memory card or storage space",
+        "Time and creativity"
+      ]
+    },
+    {
+      "id": "running",
+      "name": "Running",
+      "category": "Active",
+      "price": "$",
+      "availability": "High",
+      "difficulty": 2,
+      "image": "img/running.jpg",
+      "description": "A simple hobby that works almost anywhere. Start at your own pace and discover the benefits of moving outdoors.",
+      "whatYouNeed": [
+        "Running shoes",
+        "Workout clothes",
+        "A place to run"
+      ]
+    },
+    {
+      "id": "dancing",
+      "name": "Dancing classes",
+      "category": "Active",
+      "price": "$-$$",
+      "availability": "Medium",
+      "difficulty": 3,
+      "image": "img/dancing.jpg",
+      "description": "Learn new moves, express yourself to music, and meet people through different dance styles.",
+      "whatYouNeed": [
+        "Comfortable clothing",
+        "Music",
+        "Joy of dancing",
+        "Access to a dance class or online tutorials"
+      ]
+    },
+    {
+      "id": "sailing",
+      "name": "Sailing",
+      "category": "Outdoors",
+      "price": "$$$",
+      "availability": "Low",
+      "difficulty": 4,
+      "image": "img/sailing.jpg",
+      "description": "Experience the wind, the sea, and the feeling of steering a sailboat yourself. A hobby combining nature, technique, and adventure.",
+      "whatYouNeed": [
+        "Access to a sailboat",
+        "Life jacket",
+        "Basic sailing skills"
+      ]
+    },
+    {
+      "id": "ceramics",
+      "name": "Ceramics",
+      "category": "Creative",
+      "price": "$$$",
+      "availability": "Medium",
+      "difficulty": 3,
+      "image": "img/ceramics.jpg",
+      "description": "Shape clay into mugs, bowls, figurines, and other creative projects. A peaceful hobby where you create something with your hands.",
+      "whatYouNeed": [
+        "Clay",
+        "Ceramic tools",
+        "Access to a kiln"
+      ]
+    },
+    {
+      "id": "crochet",
+      "name": "Crochet",
+      "category": "Creative",
+      "price": "$",
+      "availability": "High",
+      "difficulty": 2,
+      "image": "img/crochet.jpg",
+      "description": "Create everything from small decorations to clothes and blankets using yarn and a crochet hook.",
+      "whatYouNeed": [
+        "Crochet hook",
+        "Yarn",
+        "A simple pattern, can be found online or in books"
+      ]
+    },
+    {
+      "id": "painting",
+      "name": "Painting",
+      "category": "Creative",
+      "price": "$$",
+      "availability": "High",
+      "difficulty": 2,
+      "image": "img/painting.jpg",
+      "description": "Unleash your creativity and experiment with colors, shapes, and different techniques.",
+      "whatYouNeed": [
+        "Paint",
+        "Brushes",
+        "Canvas or paper"
+      ]
+    },
+    {
+      "id": "swimming",
+      "name": "Swimming",
+      "category": "Active",
+      "price": "$$",
+      "availability": "High",
+      "difficulty": 3,
+      "image": "img/swimming.jpg",
+      "description": "A versatile form of exercise that can be both relaxing and intense. Great for anyone looking to train the whole body.",
+      "whatYouNeed": [
+        "Swimwear",
+        "Access to a swimming hall or pool",
+        "Towel"
+      ]
+    },
+    {
+      "id": "instrument",
+      "name": "Learning an instrument",
+      "category": "Music",
+      "price": "$$$",
+      "availability": "Low",
+      "difficulty": 4,
+      "image": "img/instrument.jpg",
+      "description": "Learn to play an instrument and discover music in a whole new way. You can start with simple songs and improve over time.",
+      "whatYouNeed": [
+        "An instrument",
+        "Time to practice",
+        "Some form of lessons or learning material"
+      ]
+    },
+    {
+      "id": "chess",
+      "name": "Learning chess",
+      "category": "Learning",
+      "price": "$",
+      "availability": "High",
+      "difficulty": 3,
+      "image": "img/chess.jpg",
+      "description": "Develop your strategic thinking through a classic game where every move counts.",
+      "whatYouNeed": [
+        "A chessboard or a chess app",
+        "Time to practice",
+        "An opponent"
+      ]
+    },
+    {
+      "id": "yoga",
+      "name": "Yoga",
+      "category": "Health",
+      "price": "$$",
+      "availability": "High",
+      "difficulty": 2,
+      "image": "img/yoga.jpg",
+      "description": "Combine movement, balance, and relaxation through various yoga poses and exercises.",
+      "whatYouNeed": [
+        "Yoga mat",
+        "Comfortable clothing",
+        "A quiet space"
+      ]
+    },
+    {
+      "id": "darts",
+      "name": "Darts",
+      "category": "Social",
+      "price": "$$",
+      "availability": "High",
+      "difficulty": 3,
+      "image": "img/darts.jpg",
+      "description": "Test your precision and focus with darts. A hobby suitable for both competitive play and social evenings.",
+      "whatYouNeed": [
+        "Dartboard",
+        "Darts",
+        "A safe place to play"
+      ]
+    },
+    {
+      "id": "discgolf",
+      "name": "Disc golf",
+      "category": "Outdoors",
+      "price": "$",
+      "availability": "High",
+      "difficulty": 2,
+      "image": "img/discgolf.jpg",
+      "description": "Combine walks and precision by throwing discs toward baskets on a disc golf course.",
+      "whatYouNeed": [
+        "One or more discs",
+        "A disc golf course",
+        "Comfortable shoes"
+      ]
+    },
+    {
+      "id": "sourdough",
+      "name": "Sourdough baking",
+      "category": "Cooking",
+      "price": "$$",
+      "availability": "High",
+      "difficulty": 4,
+      "image": "img/sourdough.jpg",
+      "description": "Learn to bake bread with sourdough and discover the process behind creating delicious, crusty bread.",
+      "whatYouNeed": [
+        "Flour",
+        "Water",
+        "Sourdough starter",
+        "Oven"
+      ]
+    },
+    {
+      "id": "climbing",
+      "name": "Climbing",
+      "category": "Active",
+      "price": "$$$",
+      "availability": "Medium",
+      "difficulty": 4,
+      "image": "img/climbing.jpg",
+      "description": "A challenge for both body and mind. Climbing is about strength, balance, problem-solving, and daring to try new paths.",
+      "whatYouNeed": [
+        "Climbing shoes",
+        "Access to a climbing gym or outdoor crag",
+        "Basic instruction"
+      ]
+    }
+  ]
+}
