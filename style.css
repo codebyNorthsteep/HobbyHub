@@ -1,0 +1,10 @@
+:root {
+  --cyan: #5DF2F3;
+  --orange: #F2945C;
+  --teal: #70B3B3;
+  --taupe: #9D8170;
+  --dark-slate: #657373;
+  --bg-light: #F8F9FA;
+  --text-dark: #212529; /* Mörk text mot ljus bakgrund ger hög kontrast för WebAIM */
+  --text-light: #FFFFFF; /* Vit text mot mörka knappar */
+}
