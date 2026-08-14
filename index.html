@@ -1,23 +1,63 @@
-<!DOCTYPE html>
-<html lang="en"> 
-<head>  
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
     <title>HobbyHub - Find Your Next Obsession</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header>
-        <!-- Logo? -->
-        <h1>Welcome to HobbyHub</h1>
-        <h2>Find your next obsession</h2>
-    </header>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <section class="grid-container">
+      <header>
+        <!-- Logo -->
+        <img
+          src="img/hobbyhublogo.png"
+          alt="HobbyHub Logo"
+          class="logo"
+          width="400"
+          height="250"
+        />
+        <h1>Welcome to HobbyHub - Find your next obsession</h1>
+      </header>
+      <nav>
+        <a href="#">DISCOVER</a>
+        <a href="#">MY LIKED HOBBIES</a>
+        <a href="#">SIGN UP</a>
+      </nav>
 
-    <main>
+      <main>
+        <section class="intro">
+          <h2>Discover New Hobbies</h2>
+          <p>
+            Explore a wide range of hobbies and find the perfect one for you.
+            Whether you're looking for something creative, active, or relaxing,
+            we've got you covered.
+          </p>
+        </section>
+        <section class="hobby-list">
+          <h2>Explore Hobbies</h2>
+          <!-- managed with flexbox in CSS -->
+        </section>
+        <section class="newsletter">
+          <h2>Subscribe to our Newsletter</h2>
+          <p>Get the latest hobby trends and tips delivered to your inbox.</p>
+          <form id="newsletter-form">
+            <input type="email" placeholder="Enter your email" required />
+            <button type="submit">Sign Up</button>
+          </form>
+        </section>
+      </main>
 
-    </main>
-
-    <footer>
+      <footer>
+        <!-- Footer content, logos for instagram, twitter, facebook -->
         <p>&copy; 2026 HobbyHub. All rights reserved.</p>
-    </footer>
+        <nav class="social-media">
+            <!-- Social media icons would be linked to their respective platforms -->
+          <a href="#"><img src="img/insta.png" alt="Instagram" /></a>
+          <a href="#"><img src="img/twitter.png" alt="Twitter" /></a>
+          <a href="#"><img src="img/fb.png" alt="Facebook" /></a>
+        </nav>
+      </footer>
+    </section>
+  </body>
 </html>

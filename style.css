@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Merriweather|Open+Sans&display=swap');
+/* Mobile first */
 :root {
   --cyan: #5DF2F3;
   --orange: #F2945C;
@@ -7,4 +9,23 @@
   --bg-light: #F8F9FA;
   --text-dark: #212529; /* Mörk text mot ljus bakgrund ger hög kontrast för WebAIM */
   --text-light: #FFFFFF; /* Vit text mot mörka knappar */
+}
+
+p {
+  color: var(--text-dark);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+
+
+.newsletter {
+  background-color: var(--bg-light);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.intro {
+  margin-bottom: 20px;
 }
