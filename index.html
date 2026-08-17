@@ -4,10 +4,11 @@
     <meta charset="UTF-8" />
     <title>HobbyHub - Find Your Next Obsession</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
   <body>
     <section class="grid-container">
+      <!-- Header with logo and welcome message -->
       <header>
         <!-- Logo -->
         <img
@@ -19,40 +20,61 @@
         />
         <h1>Welcome to HobbyHub - Find your next obsession</h1>
       </header>
+
+      <!-- Navigation bar -->
       <nav>
-        <a href="#">DISCOVER</a>
-        <a href="#">MY LIKED HOBBIES</a>
-        <a href="#">SIGN UP</a>
+        <a href="#">DISCOVER🔍</a>
+        <a href="#">MY LIKED HOBBIES🩷</a>
+        <a href="#signup">SIGN UP✏️</a>
       </nav>
 
+      <!-- Main content area -->
       <main>
-        <section class="intro">
+        <article class="intro">
           <h2>Discover New Hobbies</h2>
           <p>
             Explore a wide range of hobbies and find the perfect one for you.
             Whether you're looking for something creative, active, or relaxing,
             we've got you covered.
           </p>
-        </section>
-        <section class="hobby-list">
+        </article>
+        <!-- Filter / Sortering -->
+        <article class="filters">
+          <select name="category">
+            <option>Category ▾</option>
+          </select>
+          <select name="price">
+            <option>Price ▾</option>
+          </select>
+          <select name="availability">
+            <option>Availability ▾</option>
+          </select>
+          <select name="difficulty">
+            <option>Difficulty ▾</option>
+          </select>
+        </article>
+
+        <article class="hobby-list">
           <h2>Explore Hobbies</h2>
           <!-- managed with flexbox in CSS -->
-        </section>
-        <section class="newsletter">
+        </article>
+        <article class="newsletter" id="signup">
           <h2>Subscribe to our Newsletter</h2>
           <p>Get the latest hobby trends and tips delivered to your inbox.</p>
           <form id="newsletter-form">
             <input type="email" placeholder="Enter your email" required />
             <button type="submit">Sign Up</button>
           </form>
-        </section>
+        </article>
       </main>
 
+      <!-- Footer content, logos for instagram, twitter, facebook -->
       <footer>
-        <!-- Footer content, logos for instagram, twitter, facebook -->
         <p>&copy; 2026 HobbyHub. All rights reserved.</p>
         <nav class="social-media">
-            <!-- Social media icons would be linked to their respective platforms -->
+          <!-- Social media icons would be linked to their respective platforms -->
+          <!-- add mailto link  "contact us"-->
+          <a href="mailto:info@hobbyhub.com">Contact Us</a>
           <a href="#"><img src="img/insta.png" alt="Instagram" /></a>
           <a href="#"><img src="img/twitter.png" alt="Twitter" /></a>
           <a href="#"><img src="img/fb.png" alt="Facebook" /></a>
