@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Merriweather|Open+Sans&display=swap");
-/* Mobile first */
+/* Define CSS variables for consistent theming of colors */
 :root {
   --cyan: #5df2f3;
   --orange: #f2945c;
@@ -11,88 +11,120 @@
   --text-light: #ffffff; /* Vit text mot mörka knappar */
 }
 
+* {
+  box-sizing: border-box;
+}
+
+/* Mobile first, base styles */
 body {
   background-color: #f2efea;
-  color: black;
-  margin: 20px;
-  font-family: "Open Sans", sans-serif;
+  color: var(--text-dark);
+  margin: 0;
+  font-family: "Open Sans", sans-serif; /*If font is available, otherwise use sans-serif */
+}
+
+h1, h2, h3, p {
+  font-family: "Merriweather", serif; /* All selected text elements use this font */
+  margin: 0 0 10px 0;
 }
 
 h1 {
-  color: var(--text-dark);
-  font-family: "Merriweather", serif;
   font-size: 40px;
   line-height: 130%;
-  margin: 0;
-  padding: 0;
-  margin-bottom: 7px;
 }
 
 p {
-  color: var(--text-dark);
-  font-family: "Merriweather", serif;
   font-size: 16px;
   line-height: 1.5;
 }
 
-section {
+/* Grid layout for the entire page */
+.grid-container {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto auto auto 50px;
+  grid-template-columns: 1fr; /* Define a single column grid layout */
+  /*grid-template-rows: auto auto auto 5px;  Define the rows for header, navigation, main content, and footer. 
+  Auto = adjust size after the content  */
+  /* grid-template-areas is used to define the layout of the grid */
   grid-template-areas:
+  /*here we define the areas wich will be positioned in the grid, could be only display:grid */
     "header"
     "navigation"
     "main-content"
     "footer";
   grid-gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
+
 header {
   grid-area: header;
-  padding: 10px;
+  text-align: center;
 }
-nav {
+
+#logo {
+max-width: 100%;
+  width: 400px;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Navigation bar */
+.main-nav {
   grid-area: navigation;
   display: flex;
   flex-direction: column; /* Meny för mobil */
 }
 
-nav a {
-  flex: 1;
+.main-nav a {
   padding: 10px;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
+  color: var(--text-dark);
+  font-weight: bold;
 }
-nav a:hover {
+.main-nav a:hover {
   text-decoration: underline;
 }
 
+/* Main content area */
 main {
   grid-area: main-content;
-  display: grid;
-  grid-template-columns: 1fr; /* En kolumn för mobil */
-  grid-gap: 10px;
-}
-
-footer {
-  grid-area: footer;
-  text-align: center;
-  padding: 20px 0;
-}
-
-a footer {
-  color: var(--text-dark);
-  text-decoration: none;
-}
-
-.logo {
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 25px;
+  background-color: beige;
+  padding: 20px;
   border-radius: 8px;
-  padding: 6px 16px;
-  font-weight: bold;
-  margin-bottom: 8px;
 }
 
+.intro {
+  
+}
+
+/* Hobby cards grid layout */
+.hobby-section {
+  display: grid;
+  grid-template-columns: 1fr; /*repeat(auto-fit, minmax(200px, 1fr));  Automatically adjust the number of columns based on available space */
+  gap: 20px;
+}
+
+.hobby-card {
+  background-color: var(--bg-light);
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.hobby-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* Newsletter section */
 .newsletter {
   background-color: var(--bg-light);
   padding: 20px;
@@ -100,62 +132,106 @@ a footer {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.intro {
-  margin-bottom: 20px;
+#newsletter-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  align-items: center;
+}
+
+#newsletter-form input[type="email"] {
+  padding: 10px 14px;
+  border-radius: 8px;
+}
+
+#newsletter-button {
+background-color: var(--cyan);
+  font-weight: bold;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+#newsletter-button:hover {
+  background-color: var(--teal);
+}
+
+
+footer {
+  grid-area: footer;
+  text-align: center;
   padding: 20px;
+  background-color: var(--dark-slate);
+  color: var(--text-light);
+  border-top: 8px dotted var(--taupe);
+}
+
+footer p {
+  color: var(--text-light);
+}
+
+footer a {
+  color: var(--text-light);
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+.social-media {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.social-media img {
+  width: 24px;
+  height: 24px;
 }
 
 /* Media Queries for Responsive Design Tablet & Desktop */
 
+/* TABLET (768px och uppåt) */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
-  h1 {
-    font-size: 30px;
+    h1{
+        font-size: 30px;
+    }
+    p{
+        font-size: 14px;
+    }
+    a{
+        font-size:  15px;
+    }
+  
+  .main-nav {
+    flex-direction: row;
+    justify-content: space-around;
   }
-  p {
-    font-size: 14px;
+
+  .hobby-section {
+    grid-template-columns: repeat(2, 1fr); /* Tablet: 2 kolumner, repeat() istället för att upprepa 1fr manuellt*/
   }
-  a {
-    font-size: 15px;
-  }
-  /* Centrerar grid-container*/
-  /*Alla sections med grid-container */
-  section.grid-container {
-    width: 1000px;
-    margin: 20px auto;
-  }
-  header {
-    text-align: center;
-  }
-  /* Ändrar grid columns till 1fr 1fr (2 enheter bredvid varandra) */
-  main {
-    grid-template-columns: 1fr 1fr;
-  }
-  nav {
-    flex-direction: row; /* Ändrar menyn till på en rad */
+
+  #newsletter-form {
+    grid-template-columns: auto 1fr auto;
   }
 }
 
+/* DESKTOP (1024px och uppåt) */
 @media screen and (min-width: 1024px) {
-  h1 {
-    font-size: 30px;
-  }
-  p {
-    font-size: 14px;
-  }
-  a {
-    font-size: 15px;
-  }
-  section.grid-container {
-    width: 1000px;
-    margin: 20px auto;
-  }
-  header {
-    text-align: center;
-  }
-  main {
-    grid-template-columns: 1fr 1fr;
-  }
-  nav {
+
+.main-nav {
     flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .hobby-section {
+    grid-template-columns: repeat(3, 1fr); /* Desktop: 3 kolumner */
+  }
+
+  #newsletter-form {
+    grid-template-columns: auto 1fr auto;
   }
 }
+
+
