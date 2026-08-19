@@ -102,6 +102,25 @@ main {
   
 }
 
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.filters select {
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  background-color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.filters select:hover {
+  border-color: var(--cyan);
+}
+
 /* Hobby cards grid layout */
 .hobby-section {
   display: grid;
@@ -119,9 +138,35 @@ main {
 
 .hobby-card img {
   width: 100%;
-  height: 150px;
+  height: 250px;
   object-fit: cover;
   border-radius: 6px;
+}
+
+.hobby-card {
+  position: relative;
+}
+
+.like-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: none;
+  background: white;
+  font-size: 20px;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.like-btn:hover {
+  transform: scale(1.2) rotate(5deg); /* Slightly enlarge the button and rotate on hover*/
+}
+
+.like-btn.liked {
+  color: #e74c3c; /* Change color when liked, this will work when js is implemented */
 }
 
 /* Newsletter section */
@@ -145,14 +190,19 @@ main {
 }
 
 #newsletter-button {
-background-color: var(--cyan);
+background-color: var(--orange);
   font-weight: bold;
   padding: 10px 18px;
   border-radius: 8px;
+  border: none;
   cursor: pointer;
+
 }
 #newsletter-button:hover {
+  transform: scale(0.95);
   background-color: var(--teal);
+  color: var(--text-light);
+  box-shadow: 0 6px 15px rgba(93, 242, 243, 0.4);
 }
 
 
@@ -205,7 +255,7 @@ footer a:hover {
   
   .main-nav {
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-around;/* create space around items in nav-bar*/
   }
 
   .hobby-section {
@@ -213,7 +263,7 @@ footer a:hover {
   }
 
   #newsletter-form {
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto 1fr auto; /* Sign up form layout, button goes to the right */
   }
 }
 
@@ -230,7 +280,7 @@ footer a:hover {
   }
 
   #newsletter-form {
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto 1fr auto; 
   }
 }
 
