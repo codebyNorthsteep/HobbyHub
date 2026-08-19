@@ -7,17 +7,17 @@
   --taupe: #9d8170;
   --dark-slate: #657373;
   --bg-light: #f8f9fa;
+  --bg-medium: #a5a0a2;
+
+  --bg-dark: #343a40;
   --text-dark: #212529; /* Mörk text mot ljus bakgrund ger hög kontrast för WebAIM */
   --text-light: #ffffff; /* Vit text mot mörka knappar */
 }
 
-* {
-  box-sizing: border-box;
-}
 
 /* Mobile first, base styles */
 body {
-  background-color: #f2efea;
+  background-color: var(--bg-medium);
   color: var(--text-dark);
   margin: 0;
   font-family: "Open Sans", sans-serif; /*If font is available, otherwise use sans-serif */
@@ -31,6 +31,7 @@ h1, h2, h3, p {
 h1 {
   font-size: 40px;
   line-height: 130%;
+  color: var(--text-light);
 }
 
 p {
@@ -52,20 +53,24 @@ p {
     "main-content"
     "footer";
   grid-gap: 20px;
-  max-width: 1000px;
+  max-width: auto;
   margin: 0 auto;
 }
 
 header {
   grid-area: header;
   text-align: center;
+  background-image: url("img/mountains.jpg");
+  background-size: cover;
+  padding: 30px 20px 50px 20px;
+  border-bottom-left-radius: 50% 20px;
+  border-bottom-right-radius: 50% 20px;
 }
 
 #logo {
 max-width: 100%;
-  width: 400px;
+  width: 320px;
   height: auto;
-  border-radius: 8px;
 }
 
 /* Navigation bar */
@@ -73,6 +78,9 @@ max-width: 100%;
   grid-area: navigation;
   display: flex;
   flex-direction: column; /* Meny för mobil */
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
 }
 
 .main-nav a {
@@ -81,10 +89,12 @@ max-width: 100%;
   text-decoration: none;
   text-transform: uppercase;
   color: var(--text-dark);
-  font-weight: bold;
+  border-radius: 25px;
+  background-color: var(--bg-light);
 }
 .main-nav a:hover {
   text-decoration: underline;
+  transform: scale(1.05);
 }
 
 /* Main content area */
@@ -93,26 +103,40 @@ main {
   display: flex;
   flex-direction: column;
   grid-gap: 25px;
-  background-color: beige;
+  background-color: var(--bg-light);
   padding: 20px;
   border-radius: 8px;
 }
 
 .intro {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: var(--bg-light);
+  padding: 30px;
+  border-radius: 20px;
   
+}
+
+.intro p {
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+.intro p:last-child {
+  margin-bottom: 30px; /* Add extra space after the last paragraph */
 }
 
 .filters {
   display: flex;
-  gap: 10px;
-  margin-bottom: 15px;
+  gap: 12px;
+  margin: 20px 0 30px 0;
 }
 
 .filters select {
   padding: 8px 14px;
   border-radius: 20px;
-  border: 1px solid #ccc;
-  background-color: white;
+  border: 1px solid var(--dark-slate);
+  background-color: var(--bg-light);
   font-size: 14px;
   cursor: pointer;
 }
@@ -149,15 +173,15 @@ main {
 
 .like-btn {
   position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 35px;
-  height: 35px;
+  top: 30px;
+  right: 30px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: none;
-  background: white;
-  font-size: 20px;
-  color: #ccc;
+  background: var(--bg-light);
+  font-size: 30px;
+  color: var(--dark-slate);
   cursor: pointer;
 }
 
@@ -258,6 +282,11 @@ footer a:hover {
     justify-content: space-around;/* create space around items in nav-bar*/
   }
 
+  .intro {
+    flex-direction: row; /* Change intro section to row layout on tablet */
+    gap: 30px;
+  }
+
   .hobby-section {
     grid-template-columns: repeat(2, 1fr); /* Tablet: 2 kolumner, repeat() istället för att upprepa 1fr manuellt*/
   }
@@ -273,6 +302,16 @@ footer a:hover {
 .main-nav {
     flex-direction: row;
     justify-content: space-around;
+  }
+
+  .intro {
+    flex-direction: row; /* Change intro section to row layout on desktop */
+    gap: 30px;
+  }
+
+  .like-btn {
+    width: 50px;
+    height: 50px;
   }
 
   .hobby-section {
