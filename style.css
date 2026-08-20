@@ -32,6 +32,7 @@ h1 {
   font-size: 40px;
   line-height: 130%;
   color: var(--text-light);
+  border-bottom: 2px solid var(--dark-slate);
 }
 
 p {
@@ -42,12 +43,10 @@ p {
 /* Grid layout for the entire page */
 .grid-container {
   display: grid;
-  grid-template-columns: 1fr; /* Define a single column grid layout */
+  grid-template-columns: 1fr;
   /*grid-template-rows: auto auto auto 5px;  Define the rows for header, navigation, main content, and footer. 
   Auto = adjust size after the content  */
-  /* grid-template-areas is used to define the layout of the grid */
   grid-template-areas:
-  /*here we define the areas wich will be positioned in the grid, could be only display:grid */
     "header"
     "navigation"
     "main-content"
@@ -62,6 +61,7 @@ header {
   text-align: center;
   background-image: url("img/mountains.jpg");
   background-size: cover;
+  
   padding: 30px 20px 50px 20px;
   border-bottom-left-radius: 50% 20px;
   border-bottom-right-radius: 50% 20px;
@@ -158,6 +158,7 @@ main {
   padding: 15px;
   text-align: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
 .hobby-card img {
@@ -165,10 +166,6 @@ main {
   height: 250px;
   object-fit: cover;
   border-radius: 6px;
-}
-
-.hobby-card {
-  position: relative;
 }
 
 .like-btn {
@@ -191,6 +188,17 @@ main {
 
 .like-btn.liked {
   color: #e74c3c; /* Change color when liked, this will work when js is implemented */
+}
+
+.price {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  background-color: var(--text-dark);
+  color: var(--text-light);
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
 /* Newsletter section */
