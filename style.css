@@ -32,7 +32,6 @@ h1 {
   font-size: 40px;
   line-height: 130%;
   color: var(--text-light);
-  border-bottom: 2px solid var(--dark-slate);
 }
 
 p {
