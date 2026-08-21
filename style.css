@@ -10,8 +10,8 @@
   --bg-medium: #a5a0a2;
 
   --bg-dark: #343a40;
-  --text-dark: #212529; /* Mörk text mot ljus bakgrund ger hög kontrast för WebAIM */
-  --text-light: #ffffff; /* Vit text mot mörka knappar */
+  --text-dark: #212529;
+  --text-light: #ffffff;
 }
 
 
@@ -76,7 +76,7 @@ max-width: 100%;
 .main-nav {
   grid-area: navigation;
   display: flex;
-  flex-direction: column; /* Meny för mobil */
+  flex-direction: column; /* Menu for mobile */
   gap: 12px;
   justify-content: center;
   align-items: center;
@@ -158,6 +158,14 @@ main {
   text-align: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: relative;
+}
+.hobby-card-link { 
+  text-decoration: none; color: inherit; 
+}
+
+.hobby-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .hobby-card img {
@@ -272,7 +280,7 @@ footer a:hover {
 
 /* Media Queries for Responsive Design Tablet & Desktop */
 
-/* TABLET (768px och uppåt) */
+/* TABLET (768px and up) */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
     h1{
         font-size: 30px;
@@ -303,7 +311,7 @@ footer a:hover {
   }
 }
 
-/* DESKTOP (1024px och uppåt) */
+/* DESKTOP (1024px and up) */
 @media screen and (min-width: 1024px) {
 
 .main-nav {
@@ -322,12 +330,10 @@ footer a:hover {
   }
 
   .hobby-section {
-    grid-template-columns: repeat(3, 1fr); /* Desktop: 3 kolumner */
+    grid-template-columns: repeat(3, 1fr); /* Desktop: 3 columns */
   }
 
   #newsletter-form {
     grid-template-columns: auto 1fr auto; 
   }
 }
-
-
