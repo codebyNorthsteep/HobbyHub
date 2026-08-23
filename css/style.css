@@ -39,6 +39,27 @@ p {
   line-height: 1.5;
 }
 
+.empty-message {
+  text-align: center;
+  padding: 20px;
+  background-color: var(--bg-light);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+  text-align: center;
+}
+
+.empty-message a {
+  color: var(--orange);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.empty-message a:hover {
+  text-decoration: underline;
+}
+
+
 /* Grid layout for the entire page */
 .grid-container {
   display: grid;
@@ -58,7 +79,7 @@ p {
 header {
   grid-area: header;
   text-align: center;
-  background-image: url("img/mountains.jpg");
+  background-image: url("/img/mountains.jpg");
   background-size: cover;
   
   padding: 30px 20px 50px 20px;
