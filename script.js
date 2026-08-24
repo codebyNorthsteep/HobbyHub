@@ -152,6 +152,31 @@ async function showMyLikedHobbies() {
   });
 }
 
+function setupBackToTop() {
+  const backToTopBtn = document.querySelector("#backToTopBtn");
+  if (!backToTopBtn) return;
+
+  window.addEventListener("scroll", () => {
+    // Show the button when the user scrolls down 300px from the top
+    if (window.scrollY > 300) {
+      backToTopBtn.classList.add("show");
+    } else {
+      backToTopBtn.classList.remove("show");
+    }
+  });
+
+  //(smooth scroll) when clicked
+  backToTopBtn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+}
+
+// Anropa funktionen
+setupBackToTop();
+
 loadHobbies();
 loadHobbyDetails();
 showMyLikedHobbies();

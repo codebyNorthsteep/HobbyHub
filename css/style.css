@@ -172,63 +172,6 @@ main {
   gap: 20px;
 }
 
-.hobby-card {
-  background-color: var(--bg-light);
-  border-radius: 8px;
-  padding: 15px;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  position: relative;
-}
-.hobby-card-link { 
-  text-decoration: none; color: inherit; 
-}
-
-.hobby-card:hover {
-  transform: scale(1.02);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-.hobby-card img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 6px;
-}
-
-.like-btn {
-  position: absolute;
-  top: 30px;
-  right: 30px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: none;
-  background: var(--bg-light);
-  font-size: 30px;
-  color: var(--dark-slate);
-  cursor: pointer;
-}
-
-.like-btn:hover {
-  transform: scale(1.2) rotate(5deg); /* Slightly enlarge the button and rotate on hover*/
-}
-
-.like-btn.liked {
-  color: #e74c3c; /* Change color when liked, this will work when js is implemented */
-}
-
-.price {
-  position: absolute;
-  top: 30px;
-  left: 30px;
-  background-color: var(--text-dark);
-  color: var(--text-light);
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-weight: bold;
-}
-
 /* Newsletter section */
 .newsletter {
   background-color: var(--bg-light);
@@ -297,6 +240,36 @@ footer a:hover {
 .social-media img {
   width: 24px;
   height: 24px;
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--orange);
+  color: var(--text-light);
+  border: none;
+  font: bold 24px sans-serif;
+  cursor: pointer;
+  box-shadow: 0 4px 10px #0003;
+  z-index: 1000;
+  
+  opacity: 0;
+  pointer-events: none; /* Gör att den inte går att klicka på när den är osynlig */
+  transition: all 0.3s ease;
+}
+
+.back-to-top.show {
+  opacity: 1;
+  pointer-events: auto; /* Aktiverar klick igen när den syns */
+}
+
+.back-to-top:hover {
+  transform: scale(1.1);
+  background-color: var(--teal);
 }
 
 /* Media Queries for Responsive Design Tablet & Desktop */
