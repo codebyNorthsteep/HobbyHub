@@ -159,6 +159,62 @@
       "difficulty": 4,
       "image": "/img/hobbies/climbing.jpg",
       "description": "A challenge for both body and mind. Climbing is about strength, balance, problem-solving, and daring to try new paths."
+    },
+    
+
+
+
+    {
+      "id": "birdwatching",
+      "name": "Birdwatching",
+      "category": "Outdoors",
+      "price": "$",
+      "availability": "High",
+      "difficulty": 2,
+      "image": "/img/hobbies/birdwatching.jpg",
+      "description": "Discover the fascinating world of birds and enjoy the peace of nature while observing different species."
+    },
+
+    {
+      "id": "calligraphy",
+      "name": "Calligraphy",
+      "category": "Creative",
+      "price": "$$",
+      "availability": "Medium",
+      "difficulty": 3,
+      "image": "/img/hobbies/calligraphy.jpg",
+      "description": "Learn the art of beautiful writing and create elegant letters, cards, and decorations."
+    },
+
+    {
+      "id": "gardening",
+      "name": "Gardening",
+      "category": "Outdoors",
+      "price": "$$",
+      "availability": "High",
+      "difficulty": 2,
+      "image": "/img/hobbies/gardening.jpg",
+      "description": "Grow your own plants, flowers, and vegetables. A hobby that combines relaxation, creativity, and a connection to nature."
+    },
+    {
+      "id": "knitting",
+      "name": "Knitting",
+      "category": "Creative",
+      "price": "$$",
+      "availability": "High",
+      "difficulty": 2,
+      "image": "/img/hobbies/knitting.jpg",
+      "description": "Create cozy clothes, blankets, and accessories with yarn and needles. A relaxing hobby that allows you to make something useful."
+    },
+    {
+      "id": "origami",
+      "name": "Origami",
+      "category": "Creative",
+      "price": "$",
+      "availability": "High",
+      "difficulty": 3,
+      "image": "/img/hobbies/origami.jpg",
+      "description": "Learn the art of folding paper into beautiful shapes and figures. A hobby that combines creativity, patience, and precision."
     }
   ]
 }
