@@ -16,6 +16,15 @@ async function toggleLike(hobbyId) {
   localStorage.setItem("likedHobbies", JSON.stringify(likedHobbies)); // Save the updated liked hobbies back to localStorage as a JSON string
 }
 
+function showEmptyMessage(container) {
+  container.innerHTML = `
+    <div class="empty-message">
+      <p>You haven't liked any hobbies yet.</p>
+      <p>Go back to <a href="index.html">Explore</a> to find hobbies you like!</p>
+    </div>
+  `;
+}
+
 // This script fetches hobby data from a JSON file and dynamically creates hobby cards to display on the webpage.
 // "async" means that the function will return a promise and can use the await keyword to wait for asynchronous operations to complete.
 async function loadHobbies() {
@@ -31,8 +40,6 @@ async function loadHobbies() {
 
     const isLiked = getLikedHobbies().includes(hobby.id); //boolean to check if the hobby is liked, using the getLikedHobbies function to get the liked hobbies from localStorage and checking if the current hobby's id is in the array
 
-    // Set the inner HTML of the card with hobby details, using ${hobby.property} to insert the hobby's properties into the HTML,
-    // also using a link to the details page with the hobby's id as a query parameter, which allows the details page to know which hobby to display
     card.innerHTML = `
     <a href="details.html?id=${hobby.id}" class="hobby-card-link">
         <img src="${hobby.image}" alt="${hobby.name}">
@@ -46,7 +53,6 @@ async function loadHobbies() {
     const likeBtn = card.querySelector(".like-btn"); // Select the like button within the card
     likeBtn.addEventListener("click", (event) => {
       event.preventDefault(); // Prevent the default action of the button, which is to submit a form or follow a link
-      event.stopImmediatePropagation(); // Stop the event from propagating to parent elements, which prevents the click event from triggering the link to the details page
 
       toggleLike(hobby.id); // Call the toggleLike function to add or remove the hobby from liked hobbies
       likeBtn.classList.toggle("liked"); // Toggle the "liked" class on the button for visual feedback, which changes the button's appearance when liked
@@ -113,13 +119,8 @@ async function showMyLikedHobbies() {
     likedHobbies.includes(hobby.id),
   ); // Filter the hobbies to only include those that are liked
 
-if (myHobbies.length === 0) {
-    container.innerHTML = `
-      <div class="empty-message">
-        <p>You haven't liked any hobbies yet.</p>
-        <p>Go back to <a href="index.html">Explore</a> to find hobbies you like!</p>
-      </div>
-    `;
+  if (myHobbies.length === 0) {
+    showEmptyMessage(container); // Show a message if there are no liked hobbies
     return;
   }
 
@@ -140,17 +141,11 @@ if (myHobbies.length === 0) {
     const likeBtn = card.querySelector(".like-btn");
     likeBtn.addEventListener("click", (event) => {
       event.preventDefault();
-      event.stopImmediatePropagation();
 
       toggleLike(hobby.id);
       card.remove(); // Remove the card from the DOM when unliked
       if (container.children.length === 0) {
-        container.innerHTML = `
-    <article>
-      <p>You haven't liked any hobbies yet.</p>
-      <p>Go back to <a href="index.html">Explore</a> to find hobbies you like!</p>
-    </article>
-  `;
+        showEmptyMessage(container);
       }
     });
     container.appendChild(card);
