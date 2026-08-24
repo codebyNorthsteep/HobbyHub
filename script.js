@@ -2,18 +2,17 @@ function getLikedHobbies() {
   return JSON.parse(localStorage.getItem("likedHobbies")) || [];
 }
 
-// This function toggles the like status of a hobby by adding or removing its ID from the likedHobbies array in localStorage.
 async function toggleLike(hobbyId) {
   let likedHobbies = getLikedHobbies();
-  const index = likedHobbies.indexOf(hobbyId); // Check if the hobby is already liked by finding its index in the likedHobbies array
+  const index = likedHobbies.indexOf(hobbyId);
 
   if (index === -1) {
-    likedHobbies.push(hobbyId); // If the hobby is not liked, add it to the likedHobbies array to avoid duplicates
+    likedHobbies.push(hobbyId);
   } else {
-    likedHobbies.splice(index, 1); // If the hobby is already liked, remove it from the likedHobbies array
+    likedHobbies.splice(index, 1);
   }
 
-  localStorage.setItem("likedHobbies", JSON.stringify(likedHobbies)); // Save the updated liked hobbies back to localStorage as a JSON string
+  localStorage.setItem("likedHobbies", JSON.stringify(likedHobbies));
 }
 
 function showEmptyMessage(container) {
@@ -25,21 +24,16 @@ function showEmptyMessage(container) {
   `;
 }
 
-// This script fetches hobby data from a JSON file and dynamically creates hobby cards to display on the webpage.
-// "async" means that the function will return a promise and can use the await keyword to wait for asynchronous operations to complete.
 async function loadHobbies() {
-  const container = document.querySelector("#hobby-section"); // Select the container element
-  if (!container) return; // If the container is not found, exit the function early to avoid errors
-  //using const because the variables are not reassigned, they are only used within the function and do not need to be changed.
-  const response = await fetch("/hobby.json"); // Fetch the JSON file, await waits for the fetch to complete before moving on to the next line
-  const hobbieData = await response.json(); // Parse the JSON data to a JavaScript object, await waits for the parsing to complete before moving on to the next line
-
+  const container = document.querySelector("#hobby-section");
+  if (!container) return;
+  const response = await fetch("/hobby.json"); 
+  const hobbieData = await response.json();
   hobbieData.hobbies.forEach((hobby) => {
-    const card = document.createElement("article"); // Create a new article element for each hobby to display
-    card.classList.add("hobby-card"); // Add a class for styling, the class comes from the CSS file, which is used to style the hobby cards
+    const card = document.createElement("article");
+    card.classList.add("hobby-card");
 
-    const isLiked = getLikedHobbies().includes(hobby.id); //boolean to check if the hobby is liked, using the getLikedHobbies function to get the liked hobbies from localStorage and checking if the current hobby's id is in the array
-
+    const isLiked = getLikedHobbies().includes(hobby.id);
     card.innerHTML = `
     <a href="details.html?id=${hobby.id}" class="hobby-card-link">
         <img src="${hobby.image}" alt="${hobby.name}">
@@ -50,27 +44,26 @@ async function loadHobbies() {
     </a>
         `;
 
-    const likeBtn = card.querySelector(".like-btn"); // Select the like button within the card
+    const likeBtn = card.querySelector(".like-btn");
     likeBtn.addEventListener("click", (event) => {
-      event.preventDefault(); // Prevent the default action of the button, which is to submit a form or follow a link
+      event.preventDefault();
 
-      toggleLike(hobby.id); // Call the toggleLike function to add or remove the hobby from liked hobbies
-      likeBtn.classList.toggle("liked"); // Toggle the "liked" class on the button for visual feedback, which changes the button's appearance when liked
+      toggleLike(hobby.id);
+      likeBtn.classList.toggle("liked");
     });
 
-    container.appendChild(card); // Append the card to the container, which adds the card to the webpage.
-    // child means that the card is a child of the container (hobby-section), which means that the card is inside the container in the HTML structure
+    container.appendChild(card); 
   });
 }
 
 async function loadHobbyDetails() {
-  const container = document.querySelector("#hobby-details"); // Select the container element for hobby details
+  const container = document.querySelector("#hobby-details");
   if (!container) return;
-  const urlParams = new URLSearchParams(window.location.search); // Get the query parameters from the URL, which allows us to get the hobby id from the URL
-  const hobbyId = urlParams.get("id"); // Get the hobby id from the query parameters, which allows us to know which hobby to display on the details page
+  const urlParams = new URLSearchParams(window.location.search); 
+  const hobbyId = urlParams.get("id");
 
-  const response = await fetch("/hobby.json"); // Fetch the JSON file
-  const hobbieData = await response.json(); // Parse the JSON data to a JavaScript object
+  const response = await fetch("/hobby.json");
+  const hobbieData = await response.json();
   const hobby = hobbieData.hobbies.find((h) => h.id === hobbyId);
 
   if (!hobby) {
@@ -78,9 +71,7 @@ async function loadHobbyDetails() {
     return;
   }
 
-  const isLiked = getLikedHobbies().includes(hobby.id); // Check if the hobby is liked by checking if its id is in the likedHobbies array
-
-  // Display hobby details in the container
+  const isLiked = getLikedHobbies().includes(hobby.id);
   container.innerHTML = `
     <article class="hobby-detail-card">
       <div class="hobby-detail-image">
@@ -108,19 +99,19 @@ async function loadHobbyDetails() {
 }
 
 async function showMyLikedHobbies() {
-  const container = document.querySelector("#my-hobbies"); // Select the container element for liked hobbies
+  const container = document.querySelector("#my-hobbies");
   if (!container) return;
-  const likedHobbies = getLikedHobbies(); // Get the list of liked hobbies
+  const likedHobbies = getLikedHobbies();
 
   const response = await fetch("/hobby.json");
   const hobbieData = await response.json();
 
   const myHobbies = hobbieData.hobbies.filter((hobby) =>
     likedHobbies.includes(hobby.id),
-  ); // Filter the hobbies to only include those that are liked
+  );
 
   if (myHobbies.length === 0) {
-    showEmptyMessage(container); // Show a message if there are no liked hobbies
+    showEmptyMessage(container);
     return;
   }
 
@@ -174,9 +165,30 @@ function setupBackToTop() {
   });
 }
 
-// Anropa funktionen
-setupBackToTop();
+function setupNewsletterForm() {
+  const form = document.querySelector("#newsletter-form");
+  if (!form) return;
 
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const emailInput = document.querySelector("#email");
+    const emailValue = emailInput.value.trim();
+
+    // Enkel JS-validering
+    if (emailValue.length < 6 || !emailValue.includes("@")) {
+      alert("Please enter a valid email address (at least 6 characters).");
+      return;
+    }
+
+    alert(`Thank you for subscribing with: ${emailValue}`);
+    emailInput.value = "";
+  });
+}
+
+// Kom ihåg att anropa den längst ner
+setupNewsletterForm();
+
+setupBackToTop();
 loadHobbies();
 loadHobbyDetails();
 showMyLikedHobbies();
