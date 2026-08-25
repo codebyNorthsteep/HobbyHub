@@ -148,7 +148,7 @@ function setupBackToTop() {
   if (!backToTopBtn) return;
 
   window.addEventListener("scroll", () => {
-    // Show the button when the user scrolls down 300px from the top
+    // show the button when the user scrolls down 300px from the top
     if (window.scrollY > 300) {
       backToTopBtn.classList.add("show");
     } else {
