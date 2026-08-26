@@ -15,6 +15,16 @@ async function toggleLike(hobbyId) {
   localStorage.setItem("likedHobbies", JSON.stringify(likedHobbies));
 }
 
+function likeButtonEvent(hobby, parentElement) {
+  const likeBtn = parentElement.querySelector(".like-btn");
+  likeBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    toggleLike(hobby.id);
+    likeBtn.classList.toggle("liked");
+  });
+}
+
 function showEmptyMessage(container) {
   container.innerHTML = `
     <div class="empty-message">
@@ -27,14 +37,19 @@ function showEmptyMessage(container) {
 async function loadHobbies() {
   const container = document.querySelector("#hobby-section");
   if (!container) return;
-  const response = await fetch("/hobby.json"); 
-  const hobbieData = await response.json();
-  hobbieData.hobbies.forEach((hobby) => {
-    const card = document.createElement("article");
-    card.classList.add("hobby-card");
 
-    const isLiked = getLikedHobbies().includes(hobby.id);
-    card.innerHTML = `
+  try {
+    const response = await fetch("/hobby.json");
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    const hobbyData = await response.json();
+    hobbyData.hobbies.forEach((hobby) => {
+      const card = document.createElement("article");
+      card.classList.add("hobby-card");
+
+      const isLiked = getLikedHobbies().includes(hobby.id);
+      card.innerHTML = `
     <a href="details.html?id=${hobby.id}" class="hobby-card-link">
         <img src="${hobby.image}" alt="${hobby.name}">
         <h2>${hobby.name}</h2>
@@ -44,35 +59,40 @@ async function loadHobbies() {
     </a>
         `;
 
-    const likeBtn = card.querySelector(".like-btn");
-    likeBtn.addEventListener("click", (event) => {
-      event.preventDefault();
+      likeButtonEvent(hobby, card);
 
-      toggleLike(hobby.id);
-      likeBtn.classList.toggle("liked");
+      container.appendChild(card);
     });
-
-    container.appendChild(card); 
-  });
+  } catch (error) {
+    console.error("Error fetching hobbies:", error);
+    container.innerHTML =
+      "<p>Failed to load hobbies. Please try again later.</p>";
+    return;
+  }
 }
 
 async function loadHobbyDetails() {
   const container = document.querySelector("#hobby-details");
   if (!container) return;
-  const urlParams = new URLSearchParams(window.location.search); 
+  const urlParams = new URLSearchParams(window.location.search);
   const hobbyId = urlParams.get("id");
 
-  const response = await fetch("/hobby.json");
-  const hobbieData = await response.json();
-  const hobby = hobbieData.hobbies.find((h) => h.id === hobbyId);
+  try {
+    const response = await fetch("/hobby.json");
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    const hobbyData = await response.json();
 
-  if (!hobby) {
-    console.error("Hobby not found");
-    return;
-  }
+    const hobby = hobbyData.hobbies.find((h) => h.id === hobbyId);
 
-  const isLiked = getLikedHobbies().includes(hobby.id);
-  container.innerHTML = `
+    if (!hobby) {
+      console.error("Hobby not found");
+      return;
+    }
+
+    const isLiked = getLikedHobbies().includes(hobby.id);
+    container.innerHTML = `
     <article class="hobby-detail-card">
       <div class="hobby-detail-image">
         <img src="${hobby.image}" alt="${hobby.name}">
@@ -91,11 +111,13 @@ async function loadHobbyDetails() {
     </article>
     `;
 
-  const likeBtn = container.querySelector(".like-btn");
-  likeBtn.addEventListener("click", () => {
-    toggleLike(hobby.id);
-    likeBtn.classList.toggle("liked");
-  });
+    likeButtonEvent(hobby, container);
+  } catch (error) {
+    console.error("Error fetching hobbies:", error);
+    container.innerHTML =
+      "<p>Failed to load hobbies. Please try again later.</p>";
+    return;
+  }
 }
 
 async function showMyLikedHobbies() {
@@ -104,9 +126,9 @@ async function showMyLikedHobbies() {
   const likedHobbies = getLikedHobbies();
 
   const response = await fetch("/hobby.json");
-  const hobbieData = await response.json();
+  const hobbyData = await response.json();
 
-  const myHobbies = hobbieData.hobbies.filter((hobby) =>
+  const myHobbies = hobbyData.hobbies.filter((hobby) =>
     likedHobbies.includes(hobby.id),
   );
 
@@ -134,7 +156,7 @@ async function showMyLikedHobbies() {
       event.preventDefault();
 
       toggleLike(hobby.id);
-      card.remove(); // Remove the card from the DOM when unliked
+      card.remove(); // Remove the card from the section when unliked
       if (container.children.length === 0) {
         showEmptyMessage(container);
       }
@@ -160,7 +182,7 @@ function setupBackToTop() {
   backToTopBtn.addEventListener("click", () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth"
+      behavior: "smooth",
     });
   });
 }
@@ -174,7 +196,6 @@ function setupNewsletterForm() {
     const emailInput = document.querySelector("#email");
     const emailValue = emailInput.value.trim();
 
-    // Enkel JS-validering
     if (emailValue.length < 6 || !emailValue.includes("@")) {
       alert("Please enter a valid email address (at least 6 characters).");
       return;
@@ -185,7 +206,6 @@ function setupNewsletterForm() {
   });
 }
 
-// Kom ihåg att anropa den längst ner
 setupNewsletterForm();
 
 setupBackToTop();
