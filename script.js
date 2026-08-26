@@ -1,5 +1,11 @@
 function getLikedHobbies() {
-  return JSON.parse(localStorage.getItem("likedHobbies")) || [];
+  const likedHobbies = localStorage.getItem("likedHobbies"); // Retrieve the liked hobbies from localStorage
+  return JSON.parse(likedHobbies) || []; //return parsed array || empty array if null
+}
+
+function setLikedHobbies(likedHobbies) {
+  const jsonString = JSON.stringify(likedHobbies);
+  localStorage.setItem("likedHobbies", jsonString); // Store the updated array in localStorage
 }
 
 async function toggleLike(hobbyId) {
@@ -7,19 +13,16 @@ async function toggleLike(hobbyId) {
   const index = likedHobbies.indexOf(hobbyId);
 
   if (index === -1) {
-    likedHobbies.push(hobbyId);
+    likedHobbies.push(hobbyId); // Add hobbyId to the array if not already liked
   } else {
-    likedHobbies.splice(index, 1);
+    likedHobbies.splice(index, 1); // Remove hobbyId from the array if already liked to avoid duplicates
   }
-
-  localStorage.setItem("likedHobbies", JSON.stringify(likedHobbies));
+  setLikedHobbies(likedHobbies);
 }
 
 function likeButtonEvent(hobby, parentElement) {
   const likeBtn = parentElement.querySelector(".like-btn");
-  likeBtn.addEventListener("click", (event) => {
-    event.preventDefault();
-
+  likeBtn.addEventListener("click", () => {
     toggleLike(hobby.id);
     likeBtn.classList.toggle("liked");
   });
@@ -34,71 +37,75 @@ function showEmptyMessage(container) {
   `;
 }
 
-async function loadHobbies() {
-  const container = document.querySelector("#hobby-section");
-  if (!container) return;
-
+//Helpful function to fetch hobby data from the JSON file and handle errors
+async function fetchHobbyData() {
   try {
     const response = await fetch("/hobby.json");
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
-    const hobbyData = await response.json();
-    hobbyData.hobbies.forEach((hobby) => {
-      const card = document.createElement("article");
-      card.classList.add("hobby-card");
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching hobbies:", error);
+    const container = document.querySelector("#hobby-section");
+    if (container) {
+      container.innerHTML =
+        "<p>Failed to load hobbies. Please try again later.</p>";
+      return null; // Return null to indicate failure
+    }
+  }
+}
 
-      const isLiked = getLikedHobbies().includes(hobby.id);
-      card.innerHTML = `
+async function loadHobbies() {
+  const container = document.querySelector("#hobby-section");
+  if (!container) return;
+
+  const hobbyData = await fetchHobbyData();
+
+  hobbyData.hobbies.forEach((hobby) => {
+    const card = document.createElement("article");
+    card.classList.add("hobby-card");
+
+    const isLiked = getLikedHobbies().includes(hobby.id);
+
+    card.innerHTML = `
     <a href="details.html?id=${hobby.id}" class="hobby-card-link">
         <img src="${hobby.image}" alt="${hobby.name}">
         <h2>${hobby.name}</h2>
-        <button class="like-btn ${isLiked ? "liked" : ""}" aria-label="Like hobby">♥</button>
         <p class = "price">Price: ${hobby.price}</p>
         <p>Category: ${hobby.category}</p>
     </a>
+    <button type="button" class="like-btn ${isLiked ? "liked" : ""}" aria-label="Like hobby">♥</button>
         `;
 
-      likeButtonEvent(hobby, card);
-
-      container.appendChild(card);
-    });
-  } catch (error) {
-    console.error("Error fetching hobbies:", error);
-    container.innerHTML =
-      "<p>Failed to load hobbies. Please try again later.</p>";
-    return;
-  }
+    likeButtonEvent(hobby, card); // Attach the like button event listener to the card
+    container.appendChild(card);
+  });
 }
 
 async function loadHobbyDetails() {
   const container = document.querySelector("#hobby-details");
   if (!container) return;
+
   const urlParams = new URLSearchParams(window.location.search);
   const hobbyId = urlParams.get("id");
 
-  try {
-    const response = await fetch("/hobby.json");
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-    const hobbyData = await response.json();
+  const hobbyData = await fetchHobbyData();
 
-    const hobby = hobbyData.hobbies.find((h) => h.id === hobbyId);
+  const hobby = hobbyData.hobbies.find((h) => h.id === hobbyId);
+  if (!hobby) {
+    console.error("Hobby not found");
+    return;
+  }
 
-    if (!hobby) {
-      console.error("Hobby not found");
-      return;
-    }
-
-    const isLiked = getLikedHobbies().includes(hobby.id);
-    container.innerHTML = `
+  const isLiked = getLikedHobbies().includes(hobby.id);
+  container.innerHTML = `
     <article class="hobby-detail-card">
       <div class="hobby-detail-image">
         <img src="${hobby.image}" alt="${hobby.name}">
       </div>
       <div class="hobby-detail-info">
-        <button class="like-btn ${isLiked ? "liked" : ""}" aria-label="Gilla hobby">♥</button>
+        <button type="button" class="like-btn ${isLiked ? "liked" : ""}" aria-label="Gilla hobby">♥</button>
         <h1>${hobby.name}</h1>
         <p><strong>Category:</strong> ${hobby.category}</p>
         <p><strong>Price:</strong> ${hobby.price}</p>
@@ -111,13 +118,7 @@ async function loadHobbyDetails() {
     </article>
     `;
 
-    likeButtonEvent(hobby, container);
-  } catch (error) {
-    console.error("Error fetching hobbies:", error);
-    container.innerHTML =
-      "<p>Failed to load hobbies. Please try again later.</p>";
-    return;
-  }
+  likeButtonEvent(hobby, container);
 }
 
 async function showMyLikedHobbies() {
@@ -125,8 +126,7 @@ async function showMyLikedHobbies() {
   if (!container) return;
   const likedHobbies = getLikedHobbies();
 
-  const response = await fetch("/hobby.json");
-  const hobbyData = await response.json();
+  const hobbyData = await fetchHobbyData();
 
   const myHobbies = hobbyData.hobbies.filter((hobby) =>
     likedHobbies.includes(hobby.id),
@@ -145,16 +145,15 @@ async function showMyLikedHobbies() {
     <a href="details.html?id=${hobby.id}" class="hobby-card-link">
         <img src="${hobby.image}" alt="${hobby.name}">
         <h2>${hobby.name}</h2>
-        <button class="like-btn liked" aria-label="Like hobby">♥</button>
         <p class="price">Price: ${hobby.price}</p>
         <p>Category: ${hobby.category}</p>
     </a>
+    <button type="button" class="like-btn liked" aria-label="Like hobby">♥</button>
+
         `;
 
     const likeBtn = card.querySelector(".like-btn");
-    likeBtn.addEventListener("click", (event) => {
-      event.preventDefault();
-
+    likeBtn.addEventListener("click", () => {
       toggleLike(hobby.id);
       card.remove(); // Remove the card from the section when unliked
       if (container.children.length === 0) {
@@ -207,7 +206,6 @@ function setupNewsletterForm() {
 }
 
 setupNewsletterForm();
-
 setupBackToTop();
 loadHobbies();
 loadHobbyDetails();
