@@ -56,14 +56,8 @@ async function fetchHobbyData() {
   }
 }
 
-async function loadHobbies() {
-  const container = document.querySelector("#hobby-section");
-  if (!container) return;
-
-  const hobbyData = await fetchHobbyData();
-
-  hobbyData.hobbies.forEach((hobby) => {
-    const card = document.createElement("article");
+function createHobbyCard(hobby) {
+const card = document.createElement("article");
     card.classList.add("hobby-card");
 
     const isLiked = getLikedHobbies().includes(hobby.id);
@@ -79,11 +73,52 @@ async function loadHobbies() {
         `;
 
     likeButtonEvent(hobby, card); // Attach the like button event listener to the card
+    return card;
+}
+
+async function displayHobbyCards() {
+  const container = document.querySelector("#hobby-section");
+  if (!container) return;
+
+  const hobbyData = await fetchHobbyData();
+
+  hobbyData.hobbies.forEach((hobby) => {
+    const card = createHobbyCard(hobby);
     container.appendChild(card);
   });
 }
 
-async function loadHobbyDetails() {
+async function showMyLikedHobbies() {
+  const container = document.querySelector("#my-hobbies");
+  if (!container) return;
+  const likedHobbies = getLikedHobbies();
+
+  const hobbyData = await fetchHobbyData();
+
+  const myHobbies = hobbyData.hobbies.filter((hobby) =>
+    likedHobbies.includes(hobby.id),
+  );
+
+  if (myHobbies.length === 0) {
+    showEmptyMessage(container);
+    return;
+  }
+
+  myHobbies.forEach((hobby) => {
+    const card = createHobbyCard(hobby);
+    const likeBtn = card.querySelector(".like-btn");
+    likeBtn.addEventListener("click", () => {
+        card.remove(); // Remove the card from the DOM when unliked
+
+        if(container.children.length === 0) {
+          showEmptyMessage(container);
+        }
+    });
+    container.appendChild(card);
+  });
+}
+
+async function loadDetailedHobbyCard() {
   const container = document.querySelector("#hobby-details");
   if (!container) return;
 
@@ -121,48 +156,9 @@ async function loadHobbyDetails() {
   likeButtonEvent(hobby, container);
 }
 
-async function showMyLikedHobbies() {
-  const container = document.querySelector("#my-hobbies");
-  if (!container) return;
-  const likedHobbies = getLikedHobbies();
+async function filterByCategory(category) {
 
-  const hobbyData = await fetchHobbyData();
-
-  const myHobbies = hobbyData.hobbies.filter((hobby) =>
-    likedHobbies.includes(hobby.id),
-  );
-
-  if (myHobbies.length === 0) {
-    showEmptyMessage(container);
-    return;
   }
-
-  myHobbies.forEach((hobby) => {
-    const card = document.createElement("article");
-    card.classList.add("hobby-card");
-
-    card.innerHTML = `
-    <a href="details.html?id=${hobby.id}" class="hobby-card-link">
-        <img src="${hobby.image}" alt="${hobby.name}">
-        <h2>${hobby.name}</h2>
-        <p class="price">Price: ${hobby.price}</p>
-        <p>Category: ${hobby.category}</p>
-    </a>
-    <button type="button" class="like-btn liked" aria-label="Like hobby">♥</button>
-
-        `;
-
-    const likeBtn = card.querySelector(".like-btn");
-    likeBtn.addEventListener("click", () => {
-      toggleLike(hobby.id);
-      card.remove(); // Remove the card from the section when unliked
-      if (container.children.length === 0) {
-        showEmptyMessage(container);
-      }
-    });
-    container.appendChild(card);
-  });
-}
 
 function setupBackToTop() {
   const backToTopBtn = document.querySelector("#backToTopBtn");
@@ -193,8 +189,8 @@ function setupNewsletterForm() {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    const firstNameValue = form["fname"].value.trim();
-    const lastNameValue = form["lname"].value.trim();
+    const firstNameValue = form.querySelector("#fname").value.trim();
+    const lastNameValue = form.querySelector("#lname").value.trim();
 
     if (firstNameValue.length < 2) {
       alert("Please enter a valid firstname (at least 2 characters).");
@@ -215,6 +211,6 @@ function setupNewsletterForm() {
 
 setupNewsletterForm();
 setupBackToTop();
-loadHobbies();
-loadHobbyDetails();
+displayHobbyCards();
+loadDetailedHobbyCard();
 showMyLikedHobbies();
