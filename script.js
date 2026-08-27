@@ -187,21 +187,29 @@ function setupBackToTop() {
 }
 
 function setupNewsletterForm() {
-  const form = document.querySelector("#newsletter-form");
+  const form = document.querySelector("#newsletter-form"); // Select the form element
   if (!form) return;
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
-    const emailInput = document.querySelector("#email");
-    const emailValue = emailInput.value.trim();
 
-    if (emailValue.length < 6 || !emailValue.includes("@")) {
-      alert("Please enter a valid email address (at least 6 characters).");
+    const firstNameValue = form["fname"].value.trim();
+    const lastNameValue = form["lname"].value.trim();
+
+    if (firstNameValue.length < 2) {
+      alert("Please enter a valid firstname (at least 2 characters).");
       return;
     }
 
-    alert(`Thank you for subscribing with: ${emailValue}`);
-    emailInput.value = "";
+    if (lastNameValue.length < 2) {
+      alert("Please enter a valid lastname (at least 2 characters).");
+      return;
+    }
+
+    //Email validation is handled by the browser's built-in validation for the email input type, so no need to validate it here for now.
+
+    alert(`Thank you ${firstNameValue} ${lastNameValue} for subscribing to our newsletter!`);
+    form.reset(); // Reset the form
   });
 }
 

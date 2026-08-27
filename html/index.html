@@ -77,9 +77,8 @@
           </select>
         </div>
 
-        <div>
-          <h2>Explore Hobbies</h2>
-        </div>
+        <h2 id="explore-hobbies">Explore Hobbies</h2>
+
         <section class="hobby-section" id="hobby-section">
           <!-- managed with grid in CSS -->
         </section>
@@ -87,19 +86,92 @@
         <section class="newsletter" id="signup">
           <h2>Subscribe to our Newsletter</h2>
           <p>Get the latest hobby trends and tips delivered to your inbox.</p>
+
           <form id="newsletter-form">
-            <!--lable? med id()for="email"-->
-            <label for="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              placeholder="your.email@example.com"
-              required
-            />
-            <!--input eller button?-->
-            <button id="newsletter-button" type="submit" value="Sign Up">
-              Sign Up
-            </button>
+            <fieldset>
+              <legend>Personal Information</legend>
+
+              <div class="form-field">
+                <label for="fname">First Name</label>
+                <input
+                  type="text"
+                  id="fname"
+                  name="first-name"
+                  placeholder="Enter your first name"
+                  required
+                />
+              </div>
+
+              <div class="form-field">
+                <label for="lname">Last Name</label>
+                <input
+                  type="text"
+                  id="lname"
+                  name="last-name"
+                  placeholder="Enter your last name"
+                  required
+                />
+              </div>
+
+              <div class="form-field">
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="your.email@example.com"
+                  required
+                />
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Which hobby categories do you like?</legend>
+
+              <div class="checkbox-group">
+                <label>
+                  <input type="checkbox" name="interests" value="creative" />
+                  Creative
+                </label>
+
+                <label>
+                  <input type="checkbox" name="interests" value="active" />
+                  Active
+                </label>
+
+                <label>
+                  <input type="checkbox" name="interests" value="outdoors" />
+                  Outdoors
+                </label>
+
+                <label>
+                  <input type="checkbox" name="interests" value="music" />
+                  Music
+                </label>
+
+                <label>
+                  <input type="checkbox" name="interests" value="learning" />
+                  Learning
+                </label>
+
+                <label>
+                  <input type="checkbox" name="interests" value="health" />
+                  Health & Wellness
+                </label>
+
+                <label>
+                  <input type="checkbox" name="interests" value="social" />
+                  Social & Community
+                </label>
+
+                <label>
+                  <input type="checkbox" name="interests" value="cooking" />
+                  Cooking & Baking
+                </label>
+              </div>
+            </fieldset>
+
+            <button id="newsletter-button" type="submit">Sign Up</button>
           </form>
         </section>
       </main>
@@ -117,11 +189,7 @@
         </div>
       </footer>
     </div>
-    <button
-      id="backToTopBtn"
-      class="back-to-top"
-      aria-label="Back to top"
-    >
+    <button id="backToTopBtn" class="back-to-top" aria-label="Back to top">
       ↑
     </button>
     <script src="/script.js"></script>
