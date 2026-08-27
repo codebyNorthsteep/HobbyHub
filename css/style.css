@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Merriweather|Open+Sans&display=swap");
-/* Define CSS variables for consistent theming of colors */
+
 :root {
   --cyan: #5df2f3;
   --orange: #f2945c;
@@ -13,7 +13,6 @@
   --text-dark: #212529;
   --text-light: #ffffff;
 }
-
 
 /* Mobile first, base styles */
 body {
@@ -80,8 +79,7 @@ p {
     "navigation"
     "main-content"
     "footer";
-  grid-gap: 20px;
-  max-width: auto;
+  grid-gap: 25px;
   margin: 0 auto;
 }
 
@@ -90,7 +88,6 @@ header {
   text-align: center;
   background-image: url("/img/mountains.jpg");
   background-size: cover;
-  
   padding: 30px 20px 50px 20px;
   border-bottom-left-radius: 50% 20px;
   border-bottom-right-radius: 50% 20px;
@@ -195,41 +192,10 @@ main {
   gap: 20px;
 }
 
-#newsletter-form input[type="text"],
-#newsletter-form input[type="email"] {
-  padding: 10px 14px;
-  border-radius: 8px;
-  border: 1px solid var(--dark-slate);
-  font-size: 16px;
-}
-
-.checkbox-group input[type="checkbox"] {
-  width: auto;
-  margin: 0;
-}
-
-#newsletter-button {
-background-color: var(--orange);
-  font-weight: bold;
-  padding: 10px 18px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-
-}
-
-#newsletter-button:hover {
-  transform: scale(0.95);
-  background-color: var(--teal);
-  color: var(--text-light);
-  box-shadow: 0 6px 15px rgba(93, 242, 243, 0.4);
-}
-
 fieldset {
   border: 1px solid var(--dark-slate);
   border-radius: 10px;
   padding: 20px;
-  margin: 0;
 }
 
 legend {
@@ -244,17 +210,19 @@ legend {
   margin-bottom: 15px;
 }
 
-.form-field:last-child {
-  margin-bottom: 0;
-}
-
 .form-field label {
   font-weight: bold;
 }
 
+.form-field input {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--dark-slate);
+  font-size: 16px;
+}
+
 .checkbox-group {
   display: grid;
-  grid-template-columns: 1fr;
   gap: 10px;
 }
 
@@ -262,13 +230,26 @@ legend {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+#newsletter-button {
+background-color: var(--orange);
+  font-weight: bold;
+  width: 300px;
+  margin: 0 auto;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
   cursor: pointer;
+
 }
 
-.checkbox-group input {
-  width: auto;
+#newsletter-button:hover {
+  transform: scale(0.95);
+  background-color: var(--teal);
+  color: var(--text-light);
+  box-shadow: 0 6px 15px rgba(93, 242, 243, 0.4);
 }
-
 
 footer {
   grid-area: footer;
@@ -364,9 +345,10 @@ footer a:hover {
     grid-template-columns: repeat(2, 1fr); /* Tablet: 2 kolumner, repeat() istället för att upprepa 1fr manuellt*/
   }
 
-  #newsletter-form {
-    grid-template-rows: 1fr 1fr 1fr; /* Sign up form layout, button goes to the right */
+    .checkbox-group {
+    grid-template-columns: 1fr 1fr;
   }
+
 }
 
 /* DESKTOP (1024px and up) */
@@ -403,8 +385,8 @@ footer a:hover {
     grid-template-columns: repeat(3, 1fr); /* Desktop: 3 columns */
   }
 
-  #newsletter-form {
-    grid-template-columns: auto 1fr auto; 
+    .checkbox-group {
+    grid-template-columns: 1fr 1fr;
   }
   
 }
