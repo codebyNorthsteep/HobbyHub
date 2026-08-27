@@ -34,6 +34,12 @@ h1 {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 1.4);
 }
 
+h2 {
+  font-size: 20px;
+  line-height: 130%;
+  color: var(--text-dark);
+}
+
 #explore-hobbies {
   text-align: center;
   margin: 20px 0;
@@ -79,7 +85,8 @@ p {
     "navigation"
     "main-content"
     "footer";
-  grid-gap: 25px;
+  grid-gap: 20px;
+  max-width: auto;
   margin: 0 auto;
 }
 
@@ -154,6 +161,8 @@ main {
 
 .filters {
   display: flex;
+  flex-direction: column;
+  max-width: 200px;
   gap: 12px;
   margin: 20px 0 30px 0;
 }
@@ -341,6 +350,11 @@ footer a:hover {
     gap: 30px;
   }
 
+    .filters {
+    flex-direction: row; /* Change filters to row layout on desktop */
+    justify-content: space-around;
+  }
+
   .hobby-section {
     grid-template-columns: repeat(2, 1fr); /* Tablet: 2 kolumner, repeat() istället för att upprepa 1fr manuellt*/
   }
@@ -374,6 +388,11 @@ footer a:hover {
   .intro {
     flex-direction: row; /* Change intro section to row layout on desktop */
     gap: 30px;
+  }
+
+  .filters {
+    flex-direction: row; /* Change filters to row layout on desktop */
+    justify-content: space-around;
   }
 
   .like-btn {

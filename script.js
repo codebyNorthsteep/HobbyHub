@@ -101,11 +101,11 @@ async function displayHobbyCards() {
 async function showMyLikedHobbies() {
   const container = document.querySelector("#my-hobbies");
   if (!container) return;
-  const likedHobbies = getLikedHobbies();
+  const likedHobbies = getLikedHobbies(); // Get the liked hobbies from localStorage
 
-  const hobbyData = await fetchHobbyData();
+  const hobbyData = await fetchHobbyData(); // Fetch the hobby data from the JSON file
 
-  const myHobbies = hobbyData.hobbies.filter((hobby) =>
+  const myHobbies = hobbyData.hobbies.filter((hobby) =>// Filter the hobbie data to only include those that have been saved in localStorage
     likedHobbies.includes(hobby.id),
   );
 
@@ -158,7 +158,33 @@ async function loadDetailedHobbyCard() {
   likeButtonEvent(hobby, container);
 }
 
-async function filterByCategory(category) {}
+async function filterByCategory(category) {
+    const container = document.querySelector("#hobby-section");
+    if (!container) return;
+
+    const hobbyData = await fetchHobbyData();
+
+    const filteredHobbies = hobbyData.hobbies.filter((hobby) => {
+        return category === "" || hobby.category.toLowerCase() === category.toLowerCase(); // If category is empty, show all hobbies; otherwise, filter by the selected category
+    });
+
+    document.querySelector("#hobby-section").innerHTML = ""; // Clear the container before displaying filtered hobbies
+
+    filteredHobbies.forEach((hobby) => {
+        const card = createHobbyCard(hobby);
+        container.appendChild(card);
+    });
+}
+
+function setupCategoryFilter() {
+  const categoryFilter = document.querySelector("#filter-category");
+
+  if (!categoryFilter) return;
+
+  categoryFilter.addEventListener("change", () => {
+    filterByCategory(categoryFilter.value);
+  });
+}
 
 function setupBackToTop() {
   const backToTopBtn = document.querySelector("#backToTopBtn");
@@ -213,6 +239,7 @@ function setupNewsletterForm() {
 
 setupNewsletterForm();
 setupBackToTop();
+setupCategoryFilter();
 displayHobbyCards();
 loadDetailedHobbyCard();
 showMyLikedHobbies();
