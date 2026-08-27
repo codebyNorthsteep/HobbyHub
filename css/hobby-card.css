@@ -37,11 +37,11 @@
 }
 
 .like-btn:hover {
-  transform: scale(1.2) rotate(5deg); /* Slightly enlarge the button and rotate on hover*/
+  transform: scale(1.2) rotate(5deg);
 }
 
 .like-btn.liked {
-  color: #e74c3c; /* Change color when liked, this will work when js is implemented */
+  color: #e74c3c;
 }
 
 .price {

@@ -22,9 +22,19 @@ async function toggleLike(hobbyId) {
 
 function likeButtonEvent(hobby, parentElement) {
   const likeBtn = parentElement.querySelector(".like-btn");
+
   likeBtn.addEventListener("click", () => {
     toggleLike(hobby.id);
     likeBtn.classList.toggle("liked");
+
+    const myHobbiesContainer = document.querySelector("#my-hobbies");
+    if (myHobbiesContainer && myHobbiesContainer.contains(parentElement)) {
+      parentElement.remove(); // Remove the card from the DOM when unliked
+
+      if (myHobbiesContainer.children.length === 0) {
+        showEmptyMessage(myHobbiesContainer);
+      }
+    }
   });
 }
 
@@ -57,12 +67,12 @@ async function fetchHobbyData() {
 }
 
 function createHobbyCard(hobby) {
-const card = document.createElement("article");
-    card.classList.add("hobby-card");
+  const card = document.createElement("article");
+  card.classList.add("hobby-card");
 
-    const isLiked = getLikedHobbies().includes(hobby.id);
+  const isLiked = getLikedHobbies().includes(hobby.id);
 
-    card.innerHTML = `
+  card.innerHTML = `
     <a href="details.html?id=${hobby.id}" class="hobby-card-link">
         <img src="${hobby.image}" alt="${hobby.name}">
         <h2>${hobby.name}</h2>
@@ -72,8 +82,8 @@ const card = document.createElement("article");
     <button type="button" class="like-btn ${isLiked ? "liked" : ""}" aria-label="Like hobby">♥</button>
         `;
 
-    likeButtonEvent(hobby, card); // Attach the like button event listener to the card
-    return card;
+  likeButtonEvent(hobby, card); // Attach the like button event listener to the card
+  return card;
 }
 
 async function displayHobbyCards() {
@@ -106,14 +116,6 @@ async function showMyLikedHobbies() {
 
   myHobbies.forEach((hobby) => {
     const card = createHobbyCard(hobby);
-    const likeBtn = card.querySelector(".like-btn");
-    likeBtn.addEventListener("click", () => {
-        card.remove(); // Remove the card from the DOM when unliked
-
-        if(container.children.length === 0) {
-          showEmptyMessage(container);
-        }
-    });
     container.appendChild(card);
   });
 }
@@ -156,9 +158,7 @@ async function loadDetailedHobbyCard() {
   likeButtonEvent(hobby, container);
 }
 
-async function filterByCategory(category) {
-
-  }
+async function filterByCategory(category) {}
 
 function setupBackToTop() {
   const backToTopBtn = document.querySelector("#backToTopBtn");
@@ -204,7 +204,9 @@ function setupNewsletterForm() {
 
     //Email validation is handled by the browser's built-in validation for the email input type, so no need to validate it here for now.
 
-    alert(`Thank you ${firstNameValue} ${lastNameValue} for subscribing to our newsletter!`);
+    alert(
+      `Thank you ${firstNameValue} ${lastNameValue} for subscribing to our newsletter!`,
+    );
     form.reset(); // Reset the form
   });
 }
