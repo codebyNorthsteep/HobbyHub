@@ -1,11 +1,11 @@
 function getLikedHobbies() {
-  const likedHobbies = localStorage.getItem("likedHobbies"); // Retrieve the liked hobbies from localStorage
-  return JSON.parse(likedHobbies) || []; //return parsed array || empty array if null
+  const likedHobbies = localStorage.getItem("likedHobbies");
+  return JSON.parse(likedHobbies) || [];
 }
 
 function setLikedHobbies(likedHobbies) {
   const jsonString = JSON.stringify(likedHobbies);
-  localStorage.setItem("likedHobbies", jsonString); // Store the updated array in localStorage
+  localStorage.setItem("likedHobbies", jsonString);
 }
 
 async function toggleLike(hobbyId) {
@@ -13,9 +13,9 @@ async function toggleLike(hobbyId) {
   const index = likedHobbies.indexOf(hobbyId);
 
   if (index === -1) {
-    likedHobbies.push(hobbyId); // Add hobbyId to the array if not already liked
+    likedHobbies.push(hobbyId);
   } else {
-    likedHobbies.splice(index, 1); // Remove hobbyId from the array if already liked to avoid duplicates
+    likedHobbies.splice(index, 1);
   }
   setLikedHobbies(likedHobbies);
 }
@@ -47,7 +47,7 @@ function showEmptyMessage(container) {
   `;
 }
 
-//Helpful function to fetch hobby data from the JSON file and handle errors
+
 async function fetchHobbyData() {
   try {
     const response = await fetch("/hobby.json");
@@ -168,7 +168,7 @@ async function filterByCategory(category) {
         return category === "" || hobby.category.toLowerCase() === category.toLowerCase(); // If category is empty, show all hobbies; otherwise, filter by the selected category
     });
 
-    document.querySelector("#hobby-section").innerHTML = ""; // Clear the container before displaying filtered hobbies
+    container.innerHTML = ""; // Clear the container before displaying filtered hobbies, to prevent duplicates when changing the filter
 
     filteredHobbies.forEach((hobby) => {
         const card = createHobbyCard(hobby);
