@@ -16,28 +16,39 @@
 
 /* Mobile first, base styles */
 body {
-  background-color: var(--bg-medium);
+  background-color: var(--dark-slate);
   color: var(--text-dark);
   margin: 0;
-  font-family: "Open Sans", sans-serif; /*If font is available, otherwise use sans-serif */
+  font-family:
+    "Open Sans", sans-serif; /*If font is available, otherwise use sans-serif */
 }
 
-h1, h2, h3, p {
-  font-family: "Merriweather", serif; /* All selected text elements use this font */
+h1,
+h2,
+h3,
+p {
+  font-family:
+    "Merriweather", serif; /* All selected text elements use this font */
   margin: 0 0 10px 0;
 }
 
 h1 {
   font-size: 26px;
   line-height: 130%;
-  color: var(--text-light);
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 1.4);
-}
+  color: var(--orange);
+text-shadow: 0 3px 8px rgba(0, 0, 0, 0.8);}
 
 h2 {
   font-size: 20px;
   line-height: 130%;
   color: var(--text-dark);
+}
+
+#subheading {
+  font-size: 20px;
+  line-height: 130%;
+  color: var(--text-light);
+  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.8);
 }
 
 #explore-hobbies {
@@ -73,7 +84,6 @@ p {
   text-decoration: underline;
 }
 
-
 /* Grid layout for the entire page */
 .grid-container {
   display: grid;
@@ -93,15 +103,24 @@ p {
 header {
   grid-area: header;
   text-align: center;
-  background-image: url("/img/mountains.jpg");
+
+  /*Darken the background image for better text readability */
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)),
+    url("/img/mountains.jpg");
   background-size: cover;
-  padding: 30px 20px 50px 20px;
+  background-position: center 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 150px 20px 50px 20px;
   border-bottom-left-radius: 50% 20px;
   border-bottom-right-radius: 50% 20px;
 }
 
 #logo {
-max-width: 100%;
+  max-width: 100%;
   width: 320px;
   height: auto;
 }
@@ -148,7 +167,6 @@ main {
   background-color: var(--bg-light);
   padding: 30px;
   border-radius: 20px;
-  
 }
 
 .intro p {
@@ -192,7 +210,7 @@ main {
   background-color: var(--bg-light);
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 #newsletter-form {
@@ -242,7 +260,7 @@ legend {
 }
 
 #newsletter-button {
-background-color: var(--orange);
+  background-color: var(--orange);
   font-weight: bold;
   width: 300px;
   margin: 0 auto;
@@ -250,7 +268,6 @@ background-color: var(--orange);
   border-radius: 8px;
   border: none;
   cursor: pointer;
-
 }
 
 #newsletter-button:hover {
@@ -264,9 +281,9 @@ footer {
   grid-area: footer;
   text-align: center;
   padding: 20px;
-  background-color: var(--dark-slate);
+  background-color: var(--taupe);
   color: var(--text-light);
-  border-top: 8px dotted var(--taupe);
+  border-top: 8px dotted var(--dark-slate);
 }
 
 footer p {
@@ -307,7 +324,7 @@ footer a:hover {
   cursor: pointer;
   box-shadow: 0 4px 10px #0003;
   z-index: 1000;
-  
+
   opacity: 0;
   pointer-events: none; /* Gör att den inte går att klicka på när den är osynlig */
   transition: all 0.3s ease;
@@ -327,22 +344,25 @@ footer a:hover {
 
 /* TABLET (768px and up) */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
-    h1{
-        font-size: 32px;
-    }
-    h2{
-        font-size: 24px;
-    }
-    p{
-        font-size: 16px;
-    }
-    a{
-        font-size:  15px;
-    }
-  
+  h1 {
+    font-size: 32px;
+  }
+  h2 {
+    font-size: 24px;
+  }
+  #subheading {
+    font-size: 24px;
+  }
+  p {
+    font-size: 16px;
+  }
+  a {
+    font-size: 15px;
+  }
+
   .main-nav {
     flex-direction: row;
-    justify-content: space-around;/* create space around items in nav-bar*/
+    justify-content: space-around; /* create space around items in nav-bar*/
   }
 
   .intro {
@@ -350,24 +370,20 @@ footer a:hover {
     gap: 30px;
   }
 
-    .filters {
-    flex-direction: row; /* Change filters to row layout on desktop */
-    justify-content: space-around;
-  }
-
   .hobby-section {
-    grid-template-columns: repeat(2, 1fr); /* Tablet: 2 kolumner, repeat() istället för att upprepa 1fr manuellt*/
+    grid-template-columns: repeat(
+      2,
+      1fr
+    ); /* Tablet: 2 kolumner, repeat() istället för att upprepa 1fr manuellt*/
   }
 
-    .checkbox-group {
+  .checkbox-group {
     grid-template-columns: 1fr 1fr;
   }
-
 }
 
 /* DESKTOP (1024px and up) */
 @media screen and (min-width: 1024px) {
-
   h1 {
     font-size: 38px;
   }
@@ -376,11 +392,15 @@ footer a:hover {
     font-size: 28px;
   }
 
+  #subheading {
+    font-size: 28px;
+  }
+
   p {
     font-size: 17px;
   }
 
-.main-nav {
+  .main-nav {
     flex-direction: row;
     justify-content: space-around;
   }
@@ -390,22 +410,16 @@ footer a:hover {
     gap: 30px;
   }
 
-  .filters {
-    flex-direction: row; /* Change filters to row layout on desktop */
-    justify-content: space-around;
-  }
-
   .like-btn {
     width: 50px;
     height: 50px;
   }
 
   .hobby-section {
-    grid-template-columns: repeat(3, 1fr); /* Desktop: 3 columns */
+    grid-template-columns: repeat(4, 1fr); /* Desktop: 4 columns */
   }
 
-    .checkbox-group {
+  .checkbox-group {
     grid-template-columns: 1fr 1fr;
   }
-  
 }

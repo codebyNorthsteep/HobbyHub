@@ -1,11 +1,29 @@
-function getLikedHobbies() {
-  const likedHobbies = localStorage.getItem("likedHobbies");
-  return JSON.parse(likedHobbies) || [];
+async function fetchHobbyData() {
+  try {
+    const response = await fetch("/hobby.json");
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching hobbies:", error);
+    const container = document.querySelector("#hobby-section");
+    if (container) {
+      container.innerHTML =
+        "<p>Failed to load hobbies. Please try again later.</p>";
+      return null; // Return null to indicate failure
+    }
+  }
 }
 
 function setLikedHobbies(likedHobbies) {
   const jsonString = JSON.stringify(likedHobbies);
   localStorage.setItem("likedHobbies", jsonString);
+}
+
+function getLikedHobbies() {
+  const likedHobbies = localStorage.getItem("likedHobbies");
+  return JSON.parse(likedHobbies) || [];
 }
 
 async function toggleLike(hobbyId) {
@@ -45,25 +63,6 @@ function showEmptyMessage(container) {
       <p>Go back to <a href="index.html">Explore</a> to find hobbies you like!</p>
     </div>
   `;
-}
-
-
-async function fetchHobbyData() {
-  try {
-    const response = await fetch("/hobby.json");
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-    return await response.json();
-  } catch (error) {
-    console.error("Error fetching hobbies:", error);
-    const container = document.querySelector("#hobby-section");
-    if (container) {
-      container.innerHTML =
-        "<p>Failed to load hobbies. Please try again later.</p>";
-      return null; // Return null to indicate failure
-    }
-  }
 }
 
 function createHobbyCard(hobby) {
@@ -143,7 +142,7 @@ async function loadDetailedHobbyCard() {
       </div>
       <div class="hobby-detail-info">
         <button type="button" class="like-btn ${isLiked ? "liked" : ""}" aria-label="Gilla hobby">♥</button>
-        <h1>${hobby.name}</h1>
+        <h2>${hobby.name}</h2>
         <p><strong>Category:</strong> ${hobby.category}</p>
         <p><strong>Price:</strong> ${hobby.price}</p>
         <p><strong>Availability:</strong> ${hobby.availability}</p>
