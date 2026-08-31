@@ -60,7 +60,7 @@ function showEmptyMessage(container) {
   container.innerHTML = `
     <div class="empty-message">
       <p>You haven't liked any hobbies yet.</p>
-      <p>Go back to <a href="index.html">Explore</a> to find hobbies you like!</p>
+      <p>Go back to <a href="/index.html">Explore</a> to find hobbies you like!</p>
     </div>
   `;
 }
@@ -72,7 +72,7 @@ function createHobbyCard(hobby) {
   const isLiked = getLikedHobbies().includes(hobby.id);
 
   card.innerHTML = `
-    <a href="details.html?id=${hobby.id}" class="hobby-card-link">
+    <a href="html/details.html?id=${hobby.id}" class="hobby-card-link">
         <img src="${hobby.image}" alt="${hobby.name}">
         <h2>${hobby.name}</h2>
         <p class = "price">Price: ${hobby.price}</p>
@@ -148,7 +148,7 @@ async function loadDetailedHobbyCard() {
         <p><strong>Availability:</strong> ${hobby.availability}</p>
         <p><strong>Difficulty:</strong> ${hobby.difficulty} / 5</p>
         <p class="description">${hobby.description}</p>
-        <a href="index.html" class="back-btn">← Back to Explore</a>
+        <a href="/index.html" class="back-btn">← Back to Explore</a>
         <a href="liked-hobbies.html" class="back-btn">← Back to My Hobbies</a>
       </div>
     </article>
